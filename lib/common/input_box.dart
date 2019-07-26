@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'input_type.dart';
 
 class InputBox extends StatelessWidget {

@@ -9,11 +9,10 @@ class AddExpense extends StatefulWidget {
 class AddExpenseState extends State<AddExpense> {
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: Text('Add New Item',
-              style: TextStyle(fontWeight: FontWeight.w300))),
-      body: _prepareForm(),
-    );
+        appBar: AppBar(
+            title: Text('Add New Item',
+                style: TextStyle(fontWeight: FontWeight.w300))),
+        body: _prepareForm());
   }
 
   Widget _prepareForm() {
