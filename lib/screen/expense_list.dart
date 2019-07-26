@@ -17,21 +17,19 @@ class ExpenseListState extends State<ExpenseList> {
         drawer: new Drawer(
             child: new ListView(children: <Widget>[
           new DrawerHeader(
-            child: Column(children: [
-              Text("EXPENSE TRACKER"),
-              Icon(Icons.account_circle, size: 70),
-              Text("Hello You"),
-            ]),
-            decoration: new BoxDecoration(color: Colors.deepOrangeAccent),
-          ),
+              child: Column(children: [
+                Text("EXPENSE TRACKER"),
+                Icon(Icons.account_circle, size: 70),
+                Text("Hello You"),
+              ]),
+              decoration: new BoxDecoration(color: Colors.deepOrangeAccent)),
           new ListTile(
-            title: new Text("Expenses"),
-            leading: Icon(Icons.add),
-            onTap: () {
-              Navigator.push(context,
-                  new MaterialPageRoute(builder: (ctxt) => new AddExpense()));
-            },
-          ),
+              title: new Text("Expenses"),
+              leading: Icon(Icons.add),
+              onTap: () {
+                Navigator.push(context,
+                    new MaterialPageRoute(builder: (ctxt) => new AddExpense()));
+              }),
           new ListTile(
               title: new Text("Dashboard"),
               leading: Icon(Icons.dashboard),

@@ -6,6 +6,18 @@ class Categories extends StatefulWidget {
 
 class CategoriesState extends State<Categories> {
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("Categories")));
+    return DefaultTabController(
+        length: 2,
+        child: Scaffold(
+            appBar: AppBar(
+                bottom: TabBar(tabs: [
+                  Tab(icon: Icon(Icons.attach_money), text: "Expense"),
+                  Tab(icon: Icon(Icons.account_balance_wallet), text: "Income")
+                ]),
+                title: Text('Categories')),
+            body: TabBarView(children: [
+              Icon(Icons.attach_money),
+              Icon(Icons.account_balance_wallet)
+            ])));
   }
 }
