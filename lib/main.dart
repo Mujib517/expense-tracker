@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
       title: 'Tracker',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: 'Oxygen',
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
       ),
