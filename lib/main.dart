@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tracker/screen/add_expense.dart';
 import 'package:tracker/screen/expense_list.dart';
 
 void main() => runApp(MyApp());

@@ -19,10 +19,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  path_provider:
+  sqflite:
+  flutter_speed_dial: 1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +30,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/icons.json
 
 fonts:
   - family: Oxygen
@@ -39,3 +41,4 @@ fonts:
         weight: 700
       - asset: fonts/Oxygen-Light.ttf
         weight: 300
+
