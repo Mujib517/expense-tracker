@@ -14,4 +14,8 @@ class Queries {
   static String getExpensesEntry =
       "SELECT A.id,A.name,A.type,A.categoryId,A.date,A.amount,B.icon,B.name as categoryName,B.type as categoryType FROM $tblData A "
       "INNER JOIN $tblCat B ON A.categoryId = B.id WHERE A.type=? ORDER BY A.id DESC";
+
+  static String getExpensesGroupedByCategory =
+      "SELECT SUM(A.amount) as amount,B.icon,B.name as category FROM $tblData A "
+      "INNER JOIN $tblCat B ON A.categoryId = B.id WHERE A.type=? GROUP BY B.icon,B.name";
 }
