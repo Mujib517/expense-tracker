@@ -156,7 +156,7 @@ class AddExpenseState extends State<AddExpense> {
               title: "Validation Error", content: "Please fill all the data"));
     else {
       await dbHelper.insertEntry(entry);
-      Navigator.pop(context);
+      Navigator.pop(context, true);
     }
   }
 

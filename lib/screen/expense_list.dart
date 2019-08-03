@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tracker/common/control.dart';
 import 'package:tracker/common/fab.dart';
+import 'package:tracker/model/entry.dart';
+import 'package:tracker/model/type.dart';
 import 'package:tracker/screen/settings.dart';
+import 'package:tracker/util/db_helper.dart';
 
 import 'add_expense.dart';
 import 'categories.dart';
@@ -11,6 +15,14 @@ class ExpenseList extends StatefulWidget {
 }
 
 class ExpenseListState extends State<ExpenseList> {
+  Iterable<Entry> entries = List<Entry>();
+  DbHelper dbHelper = DbHelper();
+
+  void initState() {
+    getData();
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: new Drawer(
@@ -54,14 +66,51 @@ class ExpenseListState extends State<ExpenseList> {
         floatingActionButton: FAB(
           click: _onAddClick,
         ),
+        body: _body(),
         appBar: AppBar(
             backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
             title: Text("Expense Tracker",
                 style: TextStyle(fontWeight: FontWeight.w300))));
   }
 
+  ListView _body() {
+    return ListView(
+      children: _listItems(),
+    );
+  }
+
+  List<Widget> _listItems() {
+    return entries
+        .map((Entry entry) => Control(Card(
+            child: ListTile(
+                leading: Column(children: [
+                  CircleAvatar(
+                      child: Icon(IconData(entry.category.icon,
+                          fontFamily: "MaterialIcons"))),
+                  Text(entry.category.name)
+                ]),
+                isThreeLine: false,
+                trailing: Text(entry.date),
+                title: Text(entry.name),
+                subtitle: Text("\$ " + entry.amount.toString())))))
+        .toList();
+  }
+
+  getData() async {
+    await dbHelper.init();
+    List<dynamic> data = await dbHelper.getEntriesByType(EntryType.expense);
+    List<Entry> tempEntries = List<Entry>();
+    for (var i = 0; i < data.length; i++) {
+      tempEntries.add(Entry.fromObject(data[i]));
+    }
+    setState(() {
+      entries = tempEntries;
+    });
+  }
+
   void _onAddClick() async {
-    await Navigator.push(
+    bool reload = await Navigator.push(
         context, MaterialPageRoute(builder: (context) => AddExpense()));
+    if (reload) getData();
   }
 }

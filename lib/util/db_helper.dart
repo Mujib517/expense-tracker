@@ -52,6 +52,11 @@ class DbHelper {
     return await db.rawQuery("SELECT * FROM $tblCat");
   }
 
+  Future<List> getEntriesByType(int type) async {
+    Database db = await this.db;
+    return await db.rawQuery(Queries.getExpensesEntry, [type]);
+  }
+
   Future<List> getCategoriesByType(int type) async {
     Database db = await this.db;
     return await db.rawQuery("SELECT * FROM $tblCat WHERE type=$type");
