@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import 'package:tracker/model/category.dart';
+import 'package:tracker/model/entry.dart';
 import 'package:tracker/util/queries.dart';
 
 class DbHelper {
@@ -26,7 +27,7 @@ class DbHelper {
 
   Future<Database> init() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = join(dir.path, "t6.db");
+    String path = join(dir.path, "t7.db");
     return await openDatabase(path, version: 1, onCreate: _createDb);
   }
 
@@ -41,9 +42,19 @@ class DbHelper {
     return await db.insert(tblCat, category.toMap());
   }
 
+  Future<int> insertEntry(Entry entry) async {
+    Database db = await this.db;
+    return await db.insert(tblData, entry.toMap());
+  }
+
   Future<List> getCategories() async {
     Database db = await this.db;
     return await db.rawQuery("SELECT * FROM $tblCat");
+  }
+
+  Future<List> getCategoriesByType(int type) async {
+    Database db = await this.db;
+    return await db.rawQuery("SELECT * FROM $tblCat WHERE type=$type");
   }
 
 //  Future<int> update(Item item) async {

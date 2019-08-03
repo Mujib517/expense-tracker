@@ -22,6 +22,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   path_provider:
   sqflite:
+  intl:
   flutter_speed_dial: 1.2.1
 
 dev_dependencies:
