@@ -6,6 +6,6 @@ class Settings extends StatefulWidget {
 
 class SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: Text("Categories")));
+    return Scaffold(appBar: AppBar(title: Text("Settings")));
   }
 }

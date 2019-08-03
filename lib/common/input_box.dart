@@ -5,15 +5,18 @@ class InputBox extends StatelessWidget {
   String hint, label;
   bool enabled;
   InputType type;
+  TextEditingController ctrl;
 
   InputBox(
       {this.hint = "",
       this.label = "",
       this.enabled = true,
-      this.type = InputType.text});
+      this.type = InputType.text,
+      this.ctrl});
 
   Widget build(BuildContext context) {
     return TextFormField(
+        controller: ctrl,
         enabled: enabled,
         keyboardType: parseKeyboardType(type),
         decoration:

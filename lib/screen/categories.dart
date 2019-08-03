@@ -31,7 +31,7 @@ class CategoriesState extends State<Categories> {
                   Tab(icon: Icon(Icons.account_balance_wallet), text: "Income")
                 ]),
                 title: Text('Categories')),
-            body: TabBarView(children: [_income(), _expense()])));
+            body: TabBarView(children: [_expense(), _income()])));
   }
 
   void getData() async {
@@ -64,13 +64,13 @@ class CategoriesState extends State<Categories> {
     return _getFilteredItems(EntryType.expense);
   }
 
-  List<Widget> _getFilteredItems(EntryType type) {
+  List<Widget> _getFilteredItems(int type) {
     List<Widget> widgets = new List<Widget>();
     if (categoryData != null) {
       Iterator<Category> iterator = categoryData.iterator;
       while (iterator.moveNext()) {
         Category cat = iterator.current;
-        if (EntryType.values[cat.type] != type) continue;
+        if (cat.type != type) continue;
         widgets.add(ListTile(
             leading: Icon(IconData(cat.icon, fontFamily: "MaterialIcons")),
             title: Text(cat.name),
@@ -113,19 +113,19 @@ class CategoriesState extends State<Categories> {
               backgroundColor: Colors.green,
               label: 'Income Category',
               labelBackgroundColor: Colors.transparent,
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AddCategory(EntryType.income)))),
+              onTap: () => navigateToAddCategory(EntryType.income)),
           SpeedDialChild(
               child: Icon(Icons.monetization_on),
               backgroundColor: Colors.red,
               label: 'Expense Category',
               labelBackgroundColor: Colors.transparent,
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => AddCategory(EntryType.expense))))
+              onTap: () => navigateToAddCategory(EntryType.expense))
         ]);
+  }
+
+  void navigateToAddCategory(int type) async {
+    bool reload = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => AddCategory(type)));
+    if (reload) getData();
   }
 }

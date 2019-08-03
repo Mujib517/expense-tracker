@@ -4,6 +4,8 @@ class Category {
   int icon;
   int type;
 
+  Category(this.name, this.icon, this.type);
+
   Map<String, dynamic> toMap() {
     Map<String, dynamic> map = new Map<String, dynamic>();
 
