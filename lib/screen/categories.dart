@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:tracker/common/confirm_dialog.dart';
 import 'package:tracker/model/category.dart';
 import 'package:tracker/model/type.dart';
 import 'package:tracker/util/db_helper.dart';
@@ -87,6 +88,18 @@ class CategoriesState extends State<Categories> {
   }
 
   void onDelete(int id) async {
+    showDialog(
+        context: context,
+        builder: (context) => ConfirmDialog(
+            title: "Delete",
+            description: "Are you sure?",
+            onConfirm: () {
+              delete(id);
+              Navigator.of(context).pop();
+            }));
+  }
+
+  void delete(int id) async {
     await _dbHelper.init();
     await _dbHelper.deleteCategory(id);
     getData();
